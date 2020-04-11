@@ -4,8 +4,8 @@ const path = require('path');
 const config = require('config');
 
 // Routes
-const items = require('./routes/api/items');
-const users = require('./routes/api/users');
+const lists = require('./routes/api/lists');
+const register = require('./routes/api/register');
 const auth = require('./routes/api/auth');
 
 const app = express();
@@ -28,8 +28,8 @@ mongoose
   .catch((err) => console.log('error while connecting to mongoDB : ' + err));
 
 // Use routes
-app.use('/api/items', items);
-app.use('/api/users', users);
+app.use('/api/lists', lists);
+app.use('/api/register', register);
 app.use('/api/auth', auth);
 
 // Serve static assets if in production
