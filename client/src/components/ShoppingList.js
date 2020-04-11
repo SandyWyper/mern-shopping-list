@@ -6,20 +6,25 @@ import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 
 class ShoppingList extends Component {
+  static propTypes = {
+    getItems: PropTypes.func.isRequired,
+    authState: PropTypes.object.isRequired,
+  };
+
   componentDidMount() {
-    this.props.getItems();
+    // console.log(this.props.authState);
+    this.props.getItems(this.props.authState.items);
   }
   onDeleteClick = (id) => {
     this.props.deleteItem(id);
   };
   render() {
-    const { items } = this.props.itemState;
-
+    const { items } = this.props.authState;
     return (
       <Container>
         <ListGroup>
           <TransitionGroup className="shopping-list">
-            {items.map(({ _id, name }) => (
+            {items.map(({ _id, item }) => (
               <CSSTransition key={_id} timeout={500} classNames="fade">
                 <ListGroupItem>
                   <Button
@@ -30,7 +35,7 @@ class ShoppingList extends Component {
                   >
                     &times;
                   </Button>
-                  {name}
+                  {item}
                 </ListGroupItem>
               </CSSTransition>
             ))}
@@ -41,13 +46,9 @@ class ShoppingList extends Component {
   }
 }
 
-ShoppingList.propTypes = {
-  getItems: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired,
-};
-
 const mapStateToProps = (state) => ({
-  itemState: state.itemState,
+  // itemState: state.itemState,
+  authState: state.authState,
 });
 
 export default connect(mapStateToProps, { getItems, deleteItem })(ShoppingList);
