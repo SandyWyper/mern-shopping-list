@@ -53,13 +53,26 @@ router.post('/', (req, res) => {
   });
 });
 
+// @route     POST api/lists/delete/list
+// @desc      Delete a list
+// @access    Private
+router.delete('/delete/list', (req, res) => {
+  List.deleteOne({ _id: req.body.listID })
+    .then(() => res.json({ success: true }))
+    .catch((err) => {
+      console.log(err);
+      res.status(404).json({ success: false });
+    });
+});
+
 // Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
 // by default, you need to set it to false.
 mongoose.set('useFindAndModify', false);
-// @route     DELETE api/items
+
+// @route     POST api/lists/delete
 // @desc      Delete an item
 // @access    Private
-router.post('/delete', (req, res) => {
+router.post('/delete/item', (req, res) => {
   List.findOneAndUpdate(
     { _id: req.body.listID },
     { $pull: { items: { _id: req.body.itemID } } }
