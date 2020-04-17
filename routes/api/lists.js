@@ -12,8 +12,8 @@ const List = require('../../models/ShoppingList');
 // @desc      Get all shopping lists
 // @access    Private
 router.get('/', (req, res) => {
-  List.find({ userID: req.body.userID })
-    .then((items) => res.json(items))
+  List.find(req.body.userID)
+    .then((lists) => res.json(lists))
     .catch((err) => {
       console.log(err);
     });
@@ -45,7 +45,7 @@ router.post('/', (req, res) => {
     list.items.push({ item: req.body.item });
     list
       .save()
-      .then(() => res.json({ success: true }))
+      .then((list) => res.json(list))
       .catch((err) => {
         console.log(err);
         res.status(404).json({ success: false });
@@ -53,12 +53,13 @@ router.post('/', (req, res) => {
   });
 });
 
-// @route     POST api/lists/delete/list
+// @route     DELETE api/lists/delete/list
 // @desc      Delete a list
 // @access    Private
-router.delete('/delete/list', (req, res) => {
-  List.deleteOne({ _id: req.body.listID })
-    .then(() => res.json({ success: true }))
+router.delete('/delete/list/:id', (req, res) => {
+  console.log(req.params.id);
+  List.deleteOne({ _id: req.params.id })
+    .then((listID) => res.json(listID))
     .catch((err) => {
       console.log(err);
       res.status(404).json({ success: false });
@@ -83,6 +84,5 @@ router.post('/delete/item', (req, res) => {
       res.status(404).json({ success: false });
     });
 });
-// NOTE: is this the correct header type for this operation?  More of an update than a delete operation.
 
 module.exports = router;

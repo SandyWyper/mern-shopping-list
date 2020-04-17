@@ -2,8 +2,8 @@ import axios from 'axios';
 import { returnErrors } from './errorActions';
 
 import {
-  USER_LOADED,
   USER_LOADING,
+  USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -44,7 +44,7 @@ export const register = ({ name, email, password }) => (dispatch) => {
   const body = JSON.stringify({ name, email, password });
 
   axios
-    .post('/api/users', body, config)
+    .post('/api/register', body, config)
     .then((res) =>
       dispatch({
         type: REGISTER_SUCCESS,
@@ -94,7 +94,6 @@ export const logout = () => ({ type: LOGOUT_SUCCESS });
 export const tokenConfig = (getState) => {
   // Get token from local storage
   const token = getState().authState.token;
-
   // const token = [];
 
   // Headers

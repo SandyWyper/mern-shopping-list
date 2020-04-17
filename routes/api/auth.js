@@ -40,7 +40,7 @@ router.post('/', (req, res) => {
           res.json({
             token,
             user: {
-              id: user.id,
+              _id: user.id,
               name: user.name,
               email: user.email,
             },
@@ -54,9 +54,9 @@ router.post('/', (req, res) => {
 // @route     GET api/auth/user
 // @desc      Get user data
 // @access    Private
-router.get('/user', (req, res) => {
-  User.findById(req.body.userID)
-    .select('-password')
+router.get('/user', auth, (req, res) => {
+  User.findById(req.user.id)
+    .select('-password -email -registered_date')
     .then((user) => res.json(user));
 });
 

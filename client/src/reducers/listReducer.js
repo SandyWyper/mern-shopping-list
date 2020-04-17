@@ -1,0 +1,69 @@
+import {
+  LISTS_LOADING,
+  LISTS_LOADED,
+  LISTS_ADD,
+  LISTS_DELETE,
+  ITEM_ADD,
+  ITEM_DELETE,
+} from '../actions/types';
+
+const initialState = {
+  lists: [],
+  loading: false,
+  activeTab: '',
+};
+
+export default function (state = initialState, action) {
+  switch (action.type) {
+    case LISTS_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case LISTS_LOADED:
+      return {
+        ...state,
+        lists: [...action.payload],
+        loading: false,
+      };
+    case ITEM_DELETE:
+      // This seems long winded....? Perhaps a refactor at a later date.
+      let { listID, itemID } = JSON.parse(action.payload);
+      return {
+        ...state,
+        lists: state.lists.filter((list) => {
+          if (list._id !== listID) {
+            return list;
+          } else {
+            const newList = list;
+            newList.items = newList.items.filter((item) => item._id !== itemID);
+            return newList;
+          }
+        }),
+      };
+    case ITEM_ADD:
+      return {
+        ...state,
+        lists: state.lists.map((list) => {
+          if (list._id !== action.payload._id) {
+            return list;
+          } else {
+            return action.payload;
+          }
+        }),
+      };
+    case LISTS_ADD:
+      console.log(action.payload);
+      return {
+        ...state,
+        lists: [...state.lists, action.payload],
+      };
+    case LISTS_DELETE:
+      return {
+        ...state,
+        lists: state.lists.filter((list) => list._id !== action.payload),
+      };
+    default:
+      return state;
+  }
+}

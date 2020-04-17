@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import AppNavbar from './components/AppNavbar';
-import ShoppingList from './components/ShoppingList';
-import ItemModal from './components/ItemModel';
-import { Container } from 'reactstrap';
+import AppWrapper from './components/AppWrapper';
 
 import { Provider } from 'react-redux';
 import store from './store';
@@ -13,18 +10,12 @@ import './App.css';
 
 export default class App extends Component {
   componentDidMount() {
-    store.dispatch(loadUser());
+    localStorage.getItem('token') && store.dispatch(loadUser());
   }
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <AppNavbar />
-          <Container>
-            <ItemModal />
-            <ShoppingList />
-          </Container>
-        </div>
+        <AppWrapper className="App" />
       </Provider>
     );
   }
