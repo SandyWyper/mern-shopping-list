@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import {
   TabContent,
   TabPane,
@@ -16,6 +16,9 @@ import DeleteItem from './DeleteItem';
 import ItemModel from './ItemModel';
 import NewListModal from './NewListModal';
 import DeleteList from './DeleteList';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { selectTab } from '../actions/listsActions';
 
 const ListContent = (props) => {
   return (
@@ -40,51 +43,62 @@ const ListContent = (props) => {
   );
 };
 
-const Tabs = (props) => {
-  const [activeTab, setActiveTab] = useState('1');
+class Tabs extends Component {
+  static propTypes = {
+    activeTab: PropTypes.string,
+    selectTab: PropTypes.func.isRequired,
+  };
+  componentDidMount() {
+    this.props.selectTab();
+  }
 
-  const toggle = (tab) => {
-    if (activeTab !== tab) setActiveTab(tab);
+  onSwitchTabClick = (listID) => {
+    this.props.selectTab(listID);
   };
 
-  return (
-    <div>
-      <Nav tabs>
-        {props.lists.map((list, index) => {
-          const tabNum = (index + 1).toString(16);
-          return (
-            <NavItem key={list._id}>
-              <NavLink
-                className={classnames({
-                  active: activeTab === tabNum,
-                })}
-                onClick={() => {
-                  toggle(tabNum);
-                }}
-              >
-                {list.listName}
-              </NavLink>
-            </NavItem>
-          );
-        })}
-        <NavItem>
-          <NewListModal />
-        </NavItem>
-      </Nav>
-      <TabContent activeTab={activeTab}>
-        {props.lists.map((list, index) => {
-          const tabNum = (index + 1).toString(16);
-          return (
-            <TabPane key={list._id} tabId={`${tabNum}`}>
-              <ItemModel listID={list._id} />
-              <ListContent list={list} />
-              <DeleteList listID={list._id} />
-            </TabPane>
-          );
-        })}
-      </TabContent>
-    </div>
-  );
-};
+  render() {
+    const activeTab = this.props.activeTab;
 
-export default Tabs;
+    return (
+      <div>
+        <Nav tabs>
+          {this.props.lists.map((list) => {
+            return (
+              <NavItem key={list._id}>
+                <NavLink
+                  className={classnames({
+                    active: activeTab === list._id,
+                  })}
+                  onClick={() => {
+                    this.onSwitchTabClick(list._id);
+                  }}
+                >
+                  {list.listName}
+                </NavLink>
+              </NavItem>
+            );
+          })}
+          <NavItem style={{ marginLeft: 'auto' }}>
+            <NewListModal />
+          </NavItem>
+        </Nav>
+        <TabContent activeTab={activeTab}>
+          {this.props.lists.map((list) => {
+            return (
+              <TabPane key={list._id} tabId={list._id}>
+                <ItemModel listID={list._id} />
+                <ListContent list={list} />
+                <DeleteList listID={list._id} />
+              </TabPane>
+            );
+          })}
+        </TabContent>
+      </div>
+    );
+  }
+}
+const mapStateToProps = (state) => ({
+  activeTab: state.listState.activeTab,
+});
+
+export default connect(mapStateToProps, { selectTab })(Tabs);

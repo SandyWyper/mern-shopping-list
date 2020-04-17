@@ -5,6 +5,7 @@ import {
   LISTS_DELETE,
   ITEM_ADD,
   ITEM_DELETE,
+  SWITCH_TAB,
 } from '../actions/types';
 
 const initialState = {
@@ -25,6 +26,7 @@ export default function (state = initialState, action) {
         ...state,
         lists: [...action.payload],
         loading: false,
+        activeTab: action.payload[0]._id,
       };
     case ITEM_DELETE:
       // This seems long winded....? Perhaps a refactor at a later date.
@@ -53,15 +55,21 @@ export default function (state = initialState, action) {
         }),
       };
     case LISTS_ADD:
-      console.log(action.payload);
       return {
         ...state,
         lists: [...state.lists, action.payload],
+        activeTab: action.payload._id,
       };
     case LISTS_DELETE:
       return {
         ...state,
         lists: state.lists.filter((list) => list._id !== action.payload),
+        activeTab: state.lists[0]._id,
+      };
+    case SWITCH_TAB:
+      return {
+        ...state,
+        activeTab: action.payload,
       };
     default:
       return state;

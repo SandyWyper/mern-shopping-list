@@ -14,9 +14,6 @@ import { addList } from '../actions/listsActions';
 import PropTypes from 'prop-types';
 
 class NewListModal extends Component {
-  constructor(props) {
-    super(props);
-  }
   state = { modal: false, listName: '' };
 
   static propTypes = {

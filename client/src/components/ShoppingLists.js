@@ -1,26 +1,9 @@
-import React, { Component, useState } from 'react';
-import {
-  Container,
-  ListGroup,
-  ListGroupItem,
-  TabContent,
-  TabPane,
-  Nav,
-  NavItem,
-  NavLink,
-  Card,
-  Button,
-  CardTitle,
-  CardText,
-  Row,
-  Col,
-} from 'reactstrap';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import React, { Component } from 'react';
+import { Container } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getLists } from '../actions/listsActions';
 import PropTypes from 'prop-types';
 import Tabs from './Tabs';
-import classnames from 'classnames';
 
 class ShoppingList extends Component {
   static propTypes = {
@@ -37,6 +20,7 @@ class ShoppingList extends Component {
   }
   render() {
     const { lists } = this.props.lists;
+
     return (
       <Container>
         <Tabs lists={lists} />

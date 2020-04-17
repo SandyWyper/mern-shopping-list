@@ -14,9 +14,6 @@ import { addItem } from '../actions/listsActions';
 import PropTypes from 'prop-types';
 
 class ItemModal extends Component {
-  constructor(props) {
-    super(props);
-  }
   state = { modal: false, name: '' };
 
   static propTypes = {
@@ -55,7 +52,7 @@ class ItemModal extends Component {
         {this.props.isAuthenticated ? (
           <Button
             color="dark"
-            style={{ marginBottom: '2rem' }}
+            style={{ margin: '2rem 0' }}
             onClick={this.toggle}
           >
             Add Item

@@ -57,9 +57,8 @@ router.post('/', (req, res) => {
 // @desc      Delete a list
 // @access    Private
 router.delete('/delete/list/:id', (req, res) => {
-  console.log(req.params.id);
   List.deleteOne({ _id: req.params.id })
-    .then((listID) => res.json(listID))
+    .then((list) => res.json(list))
     .catch((err) => {
       console.log(err);
       res.status(404).json({ success: false });

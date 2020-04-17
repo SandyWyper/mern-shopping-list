@@ -5,11 +5,9 @@ import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 class DeleteList extends Component {
-  constructor(props) {
-    super(props);
-  }
   static propTypes = {
     deleteList: PropTypes.func.isRequired,
+    lists: PropTypes.object.isRequired,
   };
   onDeleteClick = () => {
     this.props.deleteList(this.props.listID);
@@ -17,10 +15,13 @@ class DeleteList extends Component {
   render() {
     return (
       <Button
-        className="remove-btn"
+        className="remove-btn my-5"
         color="danger"
         size="sm"
-        onClick={this.onDeleteClick}
+        onClick={() => {
+          if (window.confirm('Are you sure you wish to delete this list?'))
+            this.onDeleteClick();
+        }}
       >
         Delete List
       </Button>

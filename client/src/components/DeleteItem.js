@@ -5,9 +5,6 @@ import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 class DeleteItem extends Component {
-  constructor(props) {
-    super(props);
-  }
   static propTypes = {
     deleteItem: PropTypes.func.isRequired,
   };

@@ -5,6 +5,7 @@ import {
   LISTS_DELETE,
   ITEM_ADD,
   ITEM_DELETE,
+  SWITCH_TAB,
 } from './types';
 import axios from 'axios';
 import { tokenConfig } from './authActions';
@@ -53,7 +54,7 @@ export const deleteItem = (itemID, listID) => (dispatch) => {
 
   axios
     .post(`/api/lists/delete/item`, body, config)
-    .then((res) => {
+    .then(() => {
       dispatch({
         type: ITEM_DELETE,
         payload: body,
@@ -107,9 +108,9 @@ export const addList = (newList) => (dispatch) => {
     );
 };
 
-export const deleteList = (listID) => (dispatch, getState) => {
+export const deleteList = (listID) => (dispatch) => {
   axios
-    .delete(`./api/lists/delete/list/${listID}`, tokenConfig(getState))
+    .delete(`./api/lists/delete/list/${listID}`)
     .then(() => {
       dispatch({
         type: LISTS_DELETE,
@@ -119,4 +120,8 @@ export const deleteList = (listID) => (dispatch, getState) => {
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
+};
+
+export const selectTab = (listID) => (dispatch) => {
+  dispatch({ type: SWITCH_TAB, payload: listID });
 };
