@@ -11,9 +11,11 @@ const List = require('../../models/ShoppingList');
 // @route     GET api/lists
 // @desc      Get all shopping lists
 // @access    Private
-router.get('/', (req, res) => {
-  List.find(req.body.userID)
-    .then((lists) => res.json(lists))
+router.get('/:id', (req, res) => {
+  List.find({ userID: req.params.id })
+    .then((lists) => {
+      res.json(lists);
+    })
     .catch((err) => {
       console.log(err);
     });

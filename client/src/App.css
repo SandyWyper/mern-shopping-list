@@ -19,6 +19,6 @@
 .list-group-item {
   line-height: 2;
 }
-/* .nav:last-child {
-  justify-content: end;
-} */
+.nav-link {
+  cursor: pointer;
+}

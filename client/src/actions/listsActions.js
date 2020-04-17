@@ -25,18 +25,16 @@ export const getLists = (userID) => (dispatch) => {
     },
   };
 
-  // Request body
-  const body = JSON.stringify({ userID });
-
   dispatch(setListsLoading());
 
   axios
-    .get('/api/lists', body, config)
+    .get(`/api/lists/${userID}`, config)
     .then((res) => {
-      dispatch({
-        type: LISTS_LOADED,
-        payload: res.data,
-      });
+      res.data > 0 &&
+        dispatch({
+          type: LISTS_LOADED,
+          payload: res.data,
+        });
     })
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))
