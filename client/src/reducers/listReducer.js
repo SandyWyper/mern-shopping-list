@@ -5,13 +5,13 @@ import {
   LISTS_DELETE,
   ITEM_ADD,
   ITEM_DELETE,
-  SWITCH_TAB,
+  SELECT_TAB,
 } from '../actions/types';
 
 const initialState = {
   lists: [],
   loading: false,
-  activeTab: '',
+  activeTab: 'nothing',
 };
 
 export default function (state = initialState, action) {
@@ -66,7 +66,7 @@ export default function (state = initialState, action) {
         lists: state.lists.filter((list) => list._id !== action.payload),
         activeTab: state.lists[0]._id,
       };
-    case SWITCH_TAB:
+    case SELECT_TAB:
       return {
         ...state,
         activeTab: action.payload,

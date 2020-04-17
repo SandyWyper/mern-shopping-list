@@ -4,7 +4,7 @@ export const LISTS_ADD = 'LISTS_ADD';
 export const LISTS_DELETE = 'LISTS_DELETE';
 export const ITEM_ADD = 'ITEM_ADD';
 export const ITEM_DELETE = 'ITEM_DELETE';
-export const SWITCH_TAB = 'SWITCH_TAB';
+export const SELECT_TAB = 'SELECT_TAB';
 
 export const USER_LOADING = 'USER_LOADING';
 export const USER_LOADED = 'USER_LOADED';

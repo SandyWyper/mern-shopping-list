@@ -48,9 +48,6 @@ class Tabs extends Component {
     activeTab: PropTypes.string,
     selectTab: PropTypes.func.isRequired,
   };
-  componentDidMount() {
-    this.props.selectTab();
-  }
 
   onSwitchTabClick = (listID) => {
     this.props.selectTab(listID);

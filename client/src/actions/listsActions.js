@@ -5,10 +5,10 @@ import {
   LISTS_DELETE,
   ITEM_ADD,
   ITEM_DELETE,
-  SWITCH_TAB,
+  SELECT_TAB,
 } from './types';
 import axios from 'axios';
-import { tokenConfig } from './authActions';
+// import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
 
 const setListsLoading = () => {
@@ -123,5 +123,5 @@ export const deleteList = (listID) => (dispatch) => {
 };
 
 export const selectTab = (listID) => (dispatch) => {
-  dispatch({ type: SWITCH_TAB, payload: listID });
+  dispatch({ type: SELECT_TAB, payload: listID });
 };
