@@ -50,11 +50,7 @@ class ItemModal extends Component {
     return (
       <>
         {this.props.isAuthenticated ? (
-          <Button
-            color="dark"
-            style={{ margin: '2rem 0' }}
-            onClick={this.toggle}
-          >
+          <Button className="new-btn add-item-btn" onClick={this.toggle}>
             Add Item
           </Button>
         ) : (
@@ -75,7 +71,7 @@ class ItemModal extends Component {
                   onChange={this.onChange}
                   autoFocus
                 />
-                <Button color="dark" style={{ marginTop: '2rem' }} block>
+                <Button className="new-btn" style={{ marginTop: '2rem' }} block>
                   Add Item
                 </Button>
               </FormGroup>

@@ -30,7 +30,7 @@ export const getLists = (userID) => (dispatch) => {
   axios
     .get(`/api/lists/${userID}`, config)
     .then((res) => {
-      res.data > 0 &&
+      res.data.length > 0 &&
         dispatch({
           type: LISTS_LOADED,
           payload: res.data,

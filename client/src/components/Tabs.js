@@ -29,7 +29,7 @@ const ListContent = (props) => {
             <TransitionGroup className="shopping-list">
               {props.list.items.map((item) => (
                 <CSSTransition key={item._id} timeout={500} classNames="fade">
-                  <ListGroupItem className="d-flex justify-content-between">
+                  <ListGroupItem className="d-flex justify-content-between list-group-item-list">
                     {item.item}
                     <DeleteItem itemID={item._id} listID={props.list._id} />
                   </ListGroupItem>
@@ -50,7 +50,7 @@ class Tabs extends Component {
   };
 
   onSwitchTabClick = (listID) => {
-    this.props.selectTab(listID);
+    listID !== this.props.activeTab && this.props.selectTab(listID);
   };
 
   render() {
@@ -61,7 +61,7 @@ class Tabs extends Component {
         <Nav tabs>
           {this.props.lists.map((list) => {
             return (
-              <NavItem key={list._id}>
+              <NavItem key={list._id} style={{ lineHeight: '2' }}>
                 <NavLink
                   className={classnames({
                     active: activeTab === list._id,
@@ -75,6 +75,11 @@ class Tabs extends Component {
               </NavItem>
             );
           })}
+          {this.props.lists.length < 1 && (
+            <h4 className="ml-auto mb-0" style={{ lineHeight: '2' }}>
+              Make a new list ...
+            </h4>
+          )}
           <NavItem style={{ marginLeft: 'auto' }}>
             <NewListModal />
           </NavItem>

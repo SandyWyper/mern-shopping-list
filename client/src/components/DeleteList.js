@@ -14,17 +14,18 @@ class DeleteList extends Component {
   };
   render() {
     return (
-      <Button
-        className="remove-btn my-5"
-        color="danger"
-        size="sm"
-        onClick={() => {
-          if (window.confirm('Are you sure you wish to delete this list?'))
-            this.onDeleteClick();
-        }}
-      >
-        Delete List
-      </Button>
+      <div className="text-right px-3">
+        <Button
+          className="remove-btn my-5"
+          size="sm"
+          onClick={() => {
+            if (window.confirm('Are you sure you wish to delete this list?'))
+              this.onDeleteClick();
+          }}
+        >
+          Delete List
+        </Button>
+      </div>
     );
   }
 }

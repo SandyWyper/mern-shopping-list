@@ -14,8 +14,7 @@ class DeleteItem extends Component {
   render() {
     return (
       <Button
-        className="remove-btn"
-        color="danger"
+        className="remove-btn small-btn"
         size="sm"
         onClick={this.onDeleteClick}
       >

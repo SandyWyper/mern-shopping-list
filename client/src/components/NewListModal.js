@@ -51,11 +51,7 @@ class NewListModal extends Component {
     return (
       <>
         {this.props.isAuthenticated ? (
-          <Button
-            color="success"
-            style={{ marginRight: '1rem' }}
-            onClick={this.toggle}
-          >
+          <Button className="new-btn small-btn" onClick={this.toggle}>
             &#43;
           </Button>
         ) : (
@@ -76,7 +72,7 @@ class NewListModal extends Component {
                   onChange={this.onChange}
                   autoFocus
                 />
-                <Button color="success" style={{ marginTop: '2rem' }} block>
+                <Button className="new-btn" style={{ marginTop: '2rem' }} block>
                   Add List
                 </Button>
               </FormGroup>

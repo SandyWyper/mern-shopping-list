@@ -1,5 +1,17 @@
 .remove-btn {
-  margin-right: 0.5rem;
+  /* margin-right: 0.5rem; */
+  border-radius: 0.1rem;
+  color: #3d3d3d;
+  background-color: white;
+  padding: 0.5rem 2.5rem;
+
+  /* font-size: 1.5rem; */
+}
+.remove-btn:hover {
+  background-color: red;
+  color: white;
+  border-color: black;
+  opacity: 0.7;
 }
 
 .fade-enter {
@@ -17,8 +29,40 @@
   transition: opacity 1000ms ease-in;
 }
 .list-group-item {
-  line-height: 2;
+  /* line-height: 2; */
+  padding: 0.25rem 1rem 0.25rem 1rem;
+  margin-top: 1rem;
+  border: 0;
+  border-bottom: 1px solid #dee2e6;
 }
 .nav-link {
   cursor: pointer;
+  user-select: none;
+  /* line-height: 2; */
+}
+.tab-content {
+  border-right: 1px solid #dee2e6;
+  border-left: 1px solid #dee2e6;
+  padding: 1.5rem;
+  min-height: calc(100vh - 154px);
+}
+
+.new-btn {
+  border-radius: 0.1rem;
+  background-color: rgb(107, 142, 35);
+}
+.new-btn:hover {
+  background-color: rgba(107, 142, 35, 0.8);
+}
+
+.small-btn {
+  padding: 0;
+  text-align: center;
+  width: 25px;
+
+  height: 25px;
+}
+
+.add-item-btn {
+  margin-left: 1rem;
 }

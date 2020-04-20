@@ -11,7 +11,7 @@ import {
 const initialState = {
   lists: [],
   loading: false,
-  activeTab: 'nothing',
+  activeTab: '',
 };
 
 export default function (state = initialState, action) {
@@ -64,7 +64,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         lists: state.lists.filter((list) => list._id !== action.payload),
-        activeTab: state.lists[0]._id,
+        // If the id for the first list is returned, then set activeTab to the second list of the array if it exists.
+        activeTab:
+          (state.lists[0]._id !== action.payload && state.lists[0]._id) ||
+          (state.lists[1] && state.lists[1]._id) ||
+          '',
       };
     case SELECT_TAB:
       return {
