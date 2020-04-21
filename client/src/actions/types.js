@@ -2,6 +2,7 @@ export const LISTS_LOADING = 'LISTS_LOADING';
 export const LISTS_LOADED = 'LISTS_LOADED';
 export const LISTS_ADD = 'LISTS_ADD';
 export const LISTS_DELETE = 'LISTS_DELETE';
+export const LISTS_EMPTY = 'LISTS_EMPTY';
 export const ITEM_ADD = 'ITEM_ADD';
 export const ITEM_DELETE = 'ITEM_DELETE';
 export const SELECT_TAB = 'SELECT_TAB';

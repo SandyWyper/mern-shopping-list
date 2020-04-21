@@ -3,6 +3,7 @@ import {
   LISTS_LOADED,
   LISTS_ADD,
   LISTS_DELETE,
+  LISTS_EMPTY,
   ITEM_ADD,
   ITEM_DELETE,
   SELECT_TAB,
@@ -23,11 +24,14 @@ export const getLists = (userID) => (dispatch, getState) => {
   axios
     .get(`/api/lists/${userID}`, tokenConfig(getState))
     .then((res) => {
-      res.data.length > 0 &&
-        dispatch({
-          type: LISTS_LOADED,
-          payload: res.data,
-        });
+      res.data.length > 0
+        ? dispatch({
+            type: LISTS_LOADED,
+            payload: res.data,
+          })
+        : dispatch({
+            type: LISTS_EMPTY,
+          });
     })
     .catch((err) =>
       dispatch(returnErrors(err.response.data, err.response.status))

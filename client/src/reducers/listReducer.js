@@ -3,6 +3,7 @@ import {
   LISTS_LOADED,
   LISTS_ADD,
   LISTS_DELETE,
+  LISTS_EMPTY,
   ITEM_ADD,
   ITEM_DELETE,
   SELECT_TAB,
@@ -27,6 +28,11 @@ export default function (state = initialState, action) {
         lists: [...action.payload],
         loading: false,
         activeTab: action.payload[0]._id,
+      };
+    case LISTS_EMPTY:
+      return {
+        ...state,
+        lists: [],
       };
     case ITEM_DELETE:
       // This seems long winded....? Perhaps a refactor at a later date.
