@@ -16,7 +16,7 @@ class DeleteList extends Component {
     return (
       <div className="text-right px-3">
         <Button
-          className="remove-btn my-5"
+          className="remove-btn mt-5"
           size="sm"
           onClick={() => {
             if (window.confirm('Are you sure you wish to delete this list?'))

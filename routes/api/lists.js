@@ -11,7 +11,7 @@ const List = require('../../models/ShoppingList');
 // @route     GET api/lists
 // @desc      Get all shopping lists
 // @access    Private
-router.get('/:id', (req, res) => {
+router.get('/:id', auth, (req, res) => {
   List.find({ userID: req.params.id })
     .then((lists) => {
       res.json(lists);
@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
 // @route     POST api/lists/new
 // @desc      Create a new shopping list
 // @access    Private
-router.post('/new', (req, res) => {
+router.post('/new', auth, (req, res) => {
   const newList = new List({
     listName: req.body.listName,
     userID: req.body.userID,
@@ -42,7 +42,7 @@ router.post('/new', (req, res) => {
 // @route     POST api/lists
 // @desc      Create a new item entry
 // @access    Private
-router.post('/', (req, res) => {
+router.post('/', auth, (req, res) => {
   List.findById(req.body.listID).then((list) => {
     list.items.push({ item: req.body.item });
     list
@@ -58,7 +58,7 @@ router.post('/', (req, res) => {
 // @route     DELETE api/lists/delete/list
 // @desc      Delete a list
 // @access    Private
-router.delete('/delete/list/:id', (req, res) => {
+router.delete('/delete/list/:id', auth, (req, res) => {
   List.deleteOne({ _id: req.params.id })
     .then((list) => res.json(list))
     .catch((err) => {
@@ -74,7 +74,7 @@ mongoose.set('useFindAndModify', false);
 // @route     POST api/lists/delete
 // @desc      Delete an item
 // @access    Private
-router.post('/delete/item', (req, res) => {
+router.post('/delete/item', auth, (req, res) => {
   List.findOneAndUpdate(
     { _id: req.body.listID },
     { $pull: { items: { _id: req.body.itemID } } }

@@ -8,7 +8,7 @@ import {
   SELECT_TAB,
 } from './types';
 import axios from 'axios';
-// import { tokenConfig } from './authActions';
+import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
 
 const setListsLoading = () => {
@@ -17,18 +17,11 @@ const setListsLoading = () => {
   };
 };
 
-export const getLists = (userID) => (dispatch) => {
-  //Headers
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
+export const getLists = (userID) => (dispatch, getState) => {
   dispatch(setListsLoading());
 
   axios
-    .get(`/api/lists/${userID}`, config)
+    .get(`/api/lists/${userID}`, tokenConfig(getState))
     .then((res) => {
       res.data.length > 0 &&
         dispatch({
@@ -41,17 +34,11 @@ export const getLists = (userID) => (dispatch) => {
     );
 };
 
-export const deleteItem = (itemID, listID) => (dispatch) => {
-  //Headers
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+export const deleteItem = (itemID, listID) => (dispatch, getState) => {
   const body = JSON.stringify({ listID, itemID });
 
   axios
-    .post(`/api/lists/delete/item`, body, config)
+    .post(`/api/lists/delete/item`, body, tokenConfig(getState))
     .then(() => {
       dispatch({
         type: ITEM_DELETE,
@@ -63,16 +50,10 @@ export const deleteItem = (itemID, listID) => (dispatch) => {
     );
 };
 
-export const addItem = (newItem) => (dispatch) => {
-  //Headers
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+export const addItem = (newItem) => (dispatch, getState) => {
   const body = JSON.stringify(newItem);
   axios
-    .post('./api/lists', body, config)
+    .post('./api/lists', body, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: ITEM_ADD,
@@ -84,17 +65,11 @@ export const addItem = (newItem) => (dispatch) => {
     );
 };
 
-export const addList = (newList) => (dispatch) => {
-  //Headers
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+export const addList = (newList) => (dispatch, getState) => {
   const body = JSON.stringify(newList);
 
   axios
-    .post('./api/lists/new', body, config)
+    .post('./api/lists/new', body, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: LISTS_ADD,
@@ -106,9 +81,9 @@ export const addList = (newList) => (dispatch) => {
     );
 };
 
-export const deleteList = (listID) => (dispatch) => {
+export const deleteList = (listID) => (dispatch, getState) => {
   axios
-    .delete(`./api/lists/delete/list/${listID}`)
+    .delete(`./api/lists/delete/list/${listID}`, tokenConfig(getState))
     .then(() => {
       dispatch({
         type: LISTS_DELETE,

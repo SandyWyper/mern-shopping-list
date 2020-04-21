@@ -29,8 +29,7 @@
   transition: opacity 1000ms ease-in;
 }
 .list-group-item {
-  /* line-height: 2; */
-  padding: 0.25rem 1rem 0.25rem 1rem;
+  padding: 0.25rem 1rem 1rem 1rem;
   margin-top: 1rem;
   border: 0;
   border-bottom: 1px solid #dee2e6;
