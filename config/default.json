@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://Sandy:Sandy123@cluster0-nuxxj.gcp.mongodb.net/test?retryWrites=true&w=majority",
+  "mongoURI": "mongodb+srv://Sandy:stmongo@cluster0-nuxxj.gcp.mongodb.net/test?retryWrites=true&w=majority",
   "jwtSecret": "shoppinglistsecret"
 }
