@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
+  // NavbarBrand,
   Nav,
   NavItem,
   // NavLink,
   Container,
-} from 'reactstrap';
-import RegisterModel from './auth/RegisterModel';
-import LoginModel from './auth/LoginModel';
-import Logout from './auth/Logout';
-
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+} from "reactstrap";
+import RegisterModel from "./auth/RegisterModel";
+import LoginModel from "./auth/LoginModel";
+import Logout from "./auth/Logout";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 export class AppNavbar extends Component {
   state = {
@@ -36,8 +35,8 @@ export class AppNavbar extends Component {
     const authLinks = (
       <>
         <NavItem>
-          <span className="navbar-text mr-3">
-            <strong>{user && `Welcome ${user.name}`}</strong>
+          <span className="welcome-message mr-3">
+            {user && `Welcome ${user.name}`}
           </span>
         </NavItem>
         <NavItem>
@@ -55,12 +54,25 @@ export class AppNavbar extends Component {
         </NavItem>
       </>
     );
+
     return (
       <div>
-        <Navbar color="dark" dark expand="sm" className="mb-5">
+        <Navbar className="b-b-pink bg-blue" fixed="top" expand="sm">
           <Container>
-            <NavbarBrand>Shopping List</NavbarBrand>
-            <NavbarToggler onClick={this.toggle} />
+            {/* <NavbarBrand className="text-warning">Shopping List</NavbarBrand> */}
+            {/* <NavbarToggler onClick={this.toggle} /> */}
+            <button
+              className={`hamburger hamburger--collapse d-sm-none ${
+                this.state.isOpen ? "is-active" : ""
+              }`}
+              type="button"
+              onClick={this.toggle}
+            >
+              <span className="hamburger-box">
+                <span className="hamburger-inner"></span>
+              </span>
+            </button>
+
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 {/* <NavItem>

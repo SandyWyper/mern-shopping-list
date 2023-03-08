@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import AppNavbar from './AppNavbar';
-import ShoppingLists from './ShoppingLists';
+import React, { Component } from "react";
+import AppNavbar from "./AppNavbar";
+import ShoppingLists from "./ShoppingLists";
 
-import GettingStarted from './GettingStarted';
-import { Container, Spinner } from 'reactstrap';
+import GettingStarted from "./GettingStarted";
+import { Container, Spinner } from "reactstrap";
 
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class AppWrapper extends Component {
   static propTypes = {
@@ -17,7 +17,7 @@ class AppWrapper extends Component {
     return (
       <>
         <AppNavbar />
-        <Container>
+        <Container style={{ paddingTop: "6rem" }}>
           {isLoading ? (
             <Spinner color="secondary" className="mx-auto d-block" />
           ) : isAuthenticated ? (

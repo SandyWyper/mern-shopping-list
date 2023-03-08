@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Container } from 'reactstrap';
-import { connect } from 'react-redux';
-import { getLists } from '../actions/listsActions';
-import PropTypes from 'prop-types';
-import Tabs from './Tabs';
+import React, { Component } from "react";
+import { Container } from "reactstrap";
+import { connect } from "react-redux";
+import { getLists } from "../actions/listsActions";
+import PropTypes from "prop-types";
+import Tabs from "./Tabs";
 
 class ShoppingList extends Component {
   static propTypes = {
@@ -16,7 +16,7 @@ class ShoppingList extends Component {
     const { isAuthenticated, user } = this.props.auth;
     isAuthenticated
       ? this.props.getLists(user._id)
-      : console.log('not authenticated yet', this.props, isAuthenticated);
+      : console.log("not authenticated yet", this.props, isAuthenticated);
   }
   render() {
     const { lists } = this.props.lists;
