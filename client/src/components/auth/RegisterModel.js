@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Button,
   Modal,
@@ -10,14 +10,14 @@ import {
   Input,
   NavLink,
   Alert,
-} from 'reactstrap';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { register } from '../../actions/authActions';
-import { clearErrors } from '../../actions/errorActions';
+} from "reactstrap";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { register } from "../../actions/authActions";
+import { clearErrors } from "../../actions/errorActions";
 
 class RegisterModal extends Component {
-  state = { modal: false, name: '', email: '', password: '', msg: null };
+  state = { modal: false, name: "", email: "", password: "", msg: null };
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
@@ -30,7 +30,7 @@ class RegisterModal extends Component {
     const { error, isAuthenticated } = this.props;
     if (error !== prevProps.error) {
       // Check for register error
-      if (error.id === 'REGISTER_FAIL') {
+      if (error.id === "REGISTER_FAIL") {
         this.setState({ msg: error.msg.msg });
       } else {
         this.setState({ msg: null });
@@ -76,7 +76,7 @@ class RegisterModal extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <NavLink onClick={this.toggle} href="#">
           Register
         </NavLink>
@@ -117,14 +117,14 @@ class RegisterModal extends Component {
                   placeholder="Password"
                   onChange={this.onChange}
                 />
-                <Button color="dark" style={{ marginTop: '2rem' }} block>
+                <Button style={{ marginTop: "2rem" }} block>
                   Register
                 </Button>
               </FormGroup>
             </Form>
           </ModalBody>
         </Modal>
-      </div>
+      </>
     );
   }
 }

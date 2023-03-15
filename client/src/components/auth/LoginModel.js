@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Button,
   Modal,
@@ -10,14 +10,14 @@ import {
   Input,
   NavLink,
   Alert,
-} from 'reactstrap';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { login } from '../../actions/authActions';
-import { clearErrors } from '../../actions/errorActions';
+} from "reactstrap";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { login } from "../../actions/authActions";
+import { clearErrors } from "../../actions/errorActions";
 
 class LoginModel extends Component {
-  state = { modal: false, email: '', password: '', msg: null };
+  state = { modal: false, email: "", password: "", msg: null };
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
@@ -30,7 +30,7 @@ class LoginModel extends Component {
     const { error, isAuthenticated } = this.props;
     if (error !== prevProps.error) {
       // Check for register error
-      if (error.id === 'LOGIN_FAIL') {
+      if (error.id === "LOGIN_FAIL") {
         this.setState({ msg: error.msg.msg });
       } else {
         this.setState({ msg: null });
@@ -71,7 +71,7 @@ class LoginModel extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <NavLink onClick={this.toggle} href="#">
           Login
         </NavLink>
@@ -102,14 +102,14 @@ class LoginModel extends Component {
                   placeholder="Password"
                   onChange={this.onChange}
                 />
-                <Button color="dark" style={{ marginTop: '2rem' }} block>
+                <Button style={{ marginTop: "2rem" }} block>
                   Login
                 </Button>
               </FormGroup>
             </Form>
           </ModalBody>
         </Modal>
-      </div>
+      </>
     );
   }
 }
